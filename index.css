@@ -1,0 +1,581 @@
+/* AI Circle and Popups Overlay Styles */
+.ai-circle, .chat-popup, .settings-popup {
+  pointer-events: auto;
+}
+
+.ai-circle {
+  transition: box-shadow 0.2s;
+  user-select: none;
+}
+
+.chat-popup, .settings-popup {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+/* Make sure popups are above the companion and always receive pointer events */
+.chat-popup, .settings-popup {
+  position: fixed;
+  z-index: 2000;
+  pointer-events: auto !important;
+}
+/* Active container for Chat/Settings: a hidden rectangle that captures pointer events */
+.active-container {
+  pointer-events: auto !important;
+  position: fixed !important;
+  z-index: 3000 !important;
+}
+/* Overlay background is click-through */
+#overlay-background {
+  pointer-events: none;
+}
+
+/* Companion container is draggable */
+.interactive {
+  cursor: grab;
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  width: 350px;
+  height: 500px;
+  border-radius: 50%;
+  background: transparent;
+  z-index: 10;
+}
+
+/* Ensure the interactive container and its children receive pointer events
+   This is required when the BrowserWindow is set to ignore mouse events
+   with forwarding (so the overlay background stays click-through). */
+.interactive { pointer-events: none; }
+.interactive .interactive-area { pointer-events: auto; }
+
+/* Temporary debug helper to visualize the interactive region */
+.debug-outline { outline: 2px dashed rgba(255,255,255,0.6); }
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pulse-fast {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-medium {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-fast {
+  animation: pulse-fast 0.8s ease-in-out infinite;
+}
+
+.animate-pulse-medium {
+  animation: pulse-medium 0.8s ease-in-out infinite 0.15s;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 0.8s ease-in-out infinite 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* ==================== Enhanced Animations ==================== */
+
+/* Smooth companion movement animations */
+@keyframes smooth-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes happy-bounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  25% { transform: translateY(-8px) scale(1.05); }
+  50% { transform: translateY(0px) scale(1); }
+  75% { transform: translateY(-4px) scale(1.02); }
+}
+
+@keyframes sad-droop {
+  0%, 100% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(4px) scaleY(0.98); }
+}
+
+@keyframes thinking-sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes angry-shake {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25% { transform: translateX(3px) rotate(-1deg); }
+  75% { transform: translateX(-3px) rotate(1deg); }
+}
+
+@keyframes vibrant-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.7)); }
+}
+
+@keyframes happy-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(34, 197, 94, 0.7)); }
+}
+
+@keyframes sad-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3)); }
+  50% { filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.5)); }
+}
+
+@keyframes angry-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.7)); }
+}
+
+/* Attention attractors */
+@keyframes pop-in {
+  0% { 
+    transform: scale(0.5) rotate(-10deg);
+    opacity: 0;
+  }
+  70% { 
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Utility animation classes */
+.animate-smooth-float {
+  animation: smooth-float 3s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 1.5s ease-in-out infinite;
+}
+
+.animate-happy-bounce {
+  animation: happy-bounce 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.animate-sad-droop {
+  animation: sad-droop 2s ease-in-out infinite;
+}
+
+.animate-thinking-sway {
+  animation: thinking-sway 2.5s ease-in-out infinite;
+}
+
+.animate-angry-shake {
+  animation: angry-shake 0.6s ease-in-out infinite;
+}
+
+.animate-pop-in {
+  animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-fade-out {
+  animation: fade-out 0.4s ease-out forwards;
+}
+/* ==================== Personality-Specific Animations ==================== */
+
+/* Optimistic Personality Animations */
+@keyframes optimistic-bounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  20% { transform: translateY(-20px) scale(1.08); }
+  40% { transform: translateY(0px) scale(1); }
+  60% { transform: translateY(-12px) scale(1.05); }
+  80% { transform: translateY(0px) scale(1.02); }
+}
+
+@keyframes celebratory-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes excited-twitch {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25% { transform: translateX(2px) rotate(1deg); }
+  75% { transform: translateX(-2px) rotate(-1deg); }
+}
+
+@keyframes happy-wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+@keyframes random-hops {
+  0%, 20% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Sarcastic Personality Animations */
+@keyframes eye-roll {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes dismissive-wave {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  50% { transform: translateX(8px) rotate(15deg); }
+}
+
+@keyframes side-glance {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(-10px); }
+}
+
+@keyframes barely-moving {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes impatient-tap {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(2px); }
+}
+
+/* Curious Personality Animations */
+@keyframes investigation-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes intense-stare {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+}
+
+@keyframes eager-follow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes scanning-motions {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(15px); }
+}
+
+@keyframes curious-fidget {
+  0%, 100% { transform: rotate(-1deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+@keyframes head-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-8deg); }
+}
+
+@keyframes discovery-jump {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes confused-tilt {
+  0%, 100% { transform: rotate(0deg) translateX(0px); }
+  50% { transform: rotate(-12deg) translateX(-5px); }
+}
+
+/* Philosophical Personality Animations */
+@keyframes contemplation-pose {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+}
+
+@keyframes zen-float {
+  0%, 100% { transform: translateY(0px); }
+  33% { transform: translateY(-8px); }
+  66% { transform: translateY(-4px); }
+}
+
+@keyframes deep-contemplation {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes deep-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+@keyframes meditative-breathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes distant-stare {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Goofy Personality Animations */
+@keyframes silly-dance {
+  0% { transform: rotate(0deg) translateY(0px) scale(1); }
+  25% { transform: rotate(15deg) translateY(-10px) scale(1.1); }
+  50% { transform: rotate(-15deg) translateY(0px) scale(1); }
+  75% { transform: rotate(10deg) translateY(-8px) scale(1.08); }
+  100% { transform: rotate(0deg) translateY(0px) scale(1); }
+}
+
+@keyframes face-twist {
+  0%, 100% { transform: skewX(0deg) rotate(0deg); }
+  25% { transform: skewX(5deg) rotate(2deg); }
+  50% { transform: skewX(-5deg) rotate(-2deg); }
+  75% { transform: skewX(3deg) rotate(1deg); }
+}
+
+@keyframes crazy-shake {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  10% { transform: translateX(5px) rotate(-3deg); }
+  20% { transform: translateX(-5px) rotate(3deg); }
+  30% { transform: translateX(3px) rotate(-2deg); }
+  40% { transform: translateX(-3px) rotate(2deg); }
+}
+
+@keyframes bouncy-hop {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes goofy-wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes crazy-dance {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, -10px) rotate(20deg); }
+  50% { transform: translate(-5px, 5px) rotate(-20deg); }
+  75% { transform: translate(-10px, -5px) rotate(15deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes pratfall {
+  0% { transform: rotate(-5deg) translateY(0px); }
+  50% { transform: rotate(-30deg) translateY(10px); }
+  100% { transform: rotate(-5deg) translateY(0px); }
+}
+
+@keyframes silly-sad {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(5px) rotate(-5deg); }
+}
+
+@keyframes thinking-silliness {
+  0%, 100% { transform: rotate(-2deg) translateX(0px); }
+  50% { transform: rotate(2deg) translateX(10px); }
+}
+
+@keyframes goofy-shrug {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* Loyal Friend Personality Animations */
+@keyframes gentle-wave {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(10deg) scale(1.02); }
+}
+
+@keyframes protective-stance {
+  0%, 100% { transform: scale(1) translateX(0px); }
+  50% { transform: scale(1.05) translateX(0px); }
+}
+
+@keyframes presence-breathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.02); opacity: 0.95; }
+}
+
+@keyframes heart-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.3)); }
+  50% { filter: drop-shadow(0 0 16px rgba(236, 72, 153, 0.6)); }
+}
+
+@keyframes caring-glow {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.4)); }
+  50% { filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7)); }
+}
+
+@keyframes supportive-sway {
+  0%, 100% { transform: rotate(-0.5deg); }
+  50% { transform: rotate(0.5deg); }
+}
+
+@keyframes caring-focus {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes protective-hover {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes supportive-nod {
+  0%, 100% { transform: rotate(0deg) translateY(0px); }
+  50% { transform: rotate(-3deg) translateY(-5px); }
+}
+
+/* Optimistic Personality Specific Glows */
+.personality-optimistic {
+  animation: happy-glow 2s ease-in-out infinite;
+}
+
+/* Sarcastic Personality Specific Glows */
+@keyframes sarcastic-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(107, 114, 128, 0.3)); }
+  50% { filter: drop-shadow(0 0 12px rgba(107, 114, 128, 0.5)); }
+}
+
+.personality-sarcastic {
+  animation: sarcastic-glow 2.5s ease-in-out infinite;
+}
+
+/* Curious Personality Specific Glows */
+@keyframes curious-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.4)); }
+  50% { filter: drop-shadow(0 0 16px rgba(96, 165, 250, 0.7)); }
+}
+
+.personality-curious {
+  animation: curious-glow 1.8s ease-in-out infinite;
+}
+
+/* Philosophical Personality Specific Glows */
+@keyframes philosophical-glow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.3)); }
+  50% { filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.5)); }
+}
+
+.personality-philosophical {
+  animation: philosophical-glow 3s ease-in-out infinite;
+}
+
+/* Goofy Personality Specific Glows */
+@keyframes goofy-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.4)); }
+  50% { filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.8)); }
+}
+
+.personality-goofy {
+  animation: goofy-glow 1.5s ease-in-out infinite;
+}
+
+/* Loyal Friend Personality Specific Glows */
+.personality-loyal-friend {
+  animation: caring-glow 2.2s ease-in-out infinite;
+}
+
+/* Animation Utility Classes */
+.animate-optimistic-bounce { animation: optimistic-bounce 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
+.animate-celebratory-spin { animation: celebratory-spin 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-eye-roll { animation: eye-roll 0.6s ease-in-out; }
+.animate-dismissive-wave { animation: dismissive-wave 0.5s ease-in-out; }
+.animate-investigation-spin { animation: investigation-spin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-head-tilt { animation: head-tilt 0.4s ease-in-out; }
+.animate-discovery-jump { animation: discovery-jump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-silly-dance { animation: silly-dance 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
+.animate-face-twist { animation: face-twist 0.6s ease-in-out; }
+.animate-pratfall { animation: pratfall 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.animate-gentle-wave { animation: gentle-wave 0.5s ease-in-out; }
+.animate-protective-stance { animation: protective-stance 0.4s ease-in-out; }
+.animate-zen-float { animation: zen-float 3s ease-in-out infinite; }
+.animate-meditative-breathing { animation: meditative-breathing 3s ease-in-out infinite; }
+.animate-supportive-nod { animation: supportive-nod 0.5s ease-in-out; }
+.animate-stance-shift { animation: protective-stance 0.6s ease-in-out; }
+.animate-concerned-sway { animation: deep-sway 2s ease-in-out infinite; }
+.animate-concerned-tilt { animation: confused-tilt 0.5s ease-in-out; }
+.animate-intense-scan { animation: investigation-spin 1.2s ease-in-out infinite; }
+.animate-thinking-scan { animation: scanning-motions 3s ease-in-out infinite; }
+.animate-questioning-pause { animation: contemplation-pose 2s ease-in-out infinite; }
+.animate-thinking-bounce { animation: thinking-sway 1s ease-in-out infinite; }
+.animate-intense-bounce { animation: optimistic-bounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
+.animate-supportive-bounce { animation: happy-bounce 1.5s ease-in-out infinite; }
+.animate-ready-bounce { animation: gentle-pulse 1s ease-in-out infinite; }
+.animate-reassuring-wave { animation: gentle-wave 0.8s ease-in-out infinite; }
+.animate-gentle-follow { animation: eager-follow 0.8s ease-in-out infinite; }
+.animate-caring-look { animation: caring-focus 1.5s ease-in-out infinite; }
+.animate-error-shake { animation: angry-shake 0.4s ease-in-out; }
+.animate-success-nod { animation: supportive-nod 0.6s ease-in-out; }
+.animate-begrudging-nod { animation: supportive-nod 0.8s ease-out; }
+.animate-confidence-boost { animation: optimistic-bounce 0.8s ease-out; }
+.animate-supportive-look { animation: caring-focus 0.6s ease-in-out; }
+.animate-gentle-sway { animation: deep-sway 3s ease-in-out infinite; }
+.animate-unbothered-shrug { animation: goofy-shrug 0.6s ease-in-out; }
+.animate-smile-transition { animation: celebratory-spin 0.4s ease-in-out; }
+.animate-frown-transition { animation: deep-sway 0.5s ease-in-out; }
+.animate-sad-transition { animation: sad-droop 0.6s ease-in-out; }
+.animate-fade-neutral { animation: fade-in 0.3s ease-in-out; }
+.animate-tap-tap { animation: impatient-tap 0.3s ease-in-out infinite; }
+.animate-side-eye-glance { animation: side-glance 0.4s ease-in-out; }
+.animate-tired-droop { animation: sad-droop 0.8s ease-in-out; }
+.animate-slow-follow { animation: eager-follow 1.2s ease-in-out infinite; }
+.animate-righteous-stance { animation: protective-stance 0.6s ease-in-out; }
+.animate-awareness { animation: caring-focus 0.5s ease-in-out; }
+.animate-guided-float { animation: zen-float 0.8s ease-in-out; }
+.animate-insight-nod { animation: supportive-nod 0.7s ease-in-out; }

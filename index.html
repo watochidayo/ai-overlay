@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Companion Overlay</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.24.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body></body>
+    <div id="root"></div>
+    <script>
+      // Make #ai-companion draggable
+      window.addEventListener('DOMContentLoaded', () => {
+        const aiCompanion = document.getElementById('ai-companion');
+        if (!aiCompanion) return;
+        let isDragging = false;
+        let offset = { x: 0, y: 0 };
+
+        aiCompanion.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          offset.x = e.clientX - aiCompanion.offsetLeft;
+          offset.y = e.clientY - aiCompanion.offsetTop;
+          aiCompanion.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            aiCompanion.style.left = `${e.clientX - offset.x}px`;
+            aiCompanion.style.top = `${e.clientY - offset.y}px`;
+          }
+        });
+
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+          aiCompanion.style.cursor = 'grab';
+        });
+      });
+    </script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
